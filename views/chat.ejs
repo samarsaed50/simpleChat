@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>welcome<span><%=usrs.name%></span></h1>
+    <ul id="message"></ul>
+    <form id="form" id="chat_form">
+      <textarea id="chat_input"></textarea>
+      <input type="submit" value="Send">
+  </form>
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/socket.io.js"></script>
+  <script>
+var socket=io.connect();//connect with server
+$('form').submit(function(e){
+  e.preventDefault();
+  socket.emit('newMessage',{'msg':$('#chat_input').val(),'username':$('span').html()});//send to server
+  $('#chat_input').val('');
+  return false;
+})
+socket.on('sendAll',function(messages){
+  $('#message').append($('<li>').html(messages));
+});
+
+  </script>
+  </body>
+</html>

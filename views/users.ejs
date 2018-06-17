@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% allusers.forEach(function(item, k) { %>
+        <a href="/users/<%=item.id%>">name:<%= item.name%></a><br/>
+              <% })%>
+  </body>
+</html>
